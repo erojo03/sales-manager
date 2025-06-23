@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/template",
+            "outputPath": "dist/sales-manager",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "template:build:production"
+              "buildTarget": "Sales-Manager:build:production"
             },
             "development": {
-              "buildTarget": "template:build:development"
+              "buildTarget": "Sales-Manager:build:development"
             }
           },
           "defaultConfiguration": "development"
