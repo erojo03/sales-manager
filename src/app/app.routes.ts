@@ -2,10 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    title: 'Login',
-    path: 'login',
+    title: 'Auth',
+    path: 'auth',
     loadComponent: () =>
-      import('./features/login/login.component').then((c) => c.LoginComponent),
+      import('./features/auth/auth.component').then((c) => c.AuthComponent),
+    loadChildren: () => import('./features/auth/auth.routes'),
   },
   {
     title: 'App',
