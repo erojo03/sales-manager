@@ -21,14 +21,16 @@ interface FeatureWithContent extends Feature {
 }
 
 @Component({
-  selector: 'app-login-features',
+  selector: 'app-auth-features',
   imports: [IconComponent],
   template: `
     <section class="flex flex-wrap gap-4">
       @for (feature of features; track feature.id) {
         <div
           class="flex items-center gap-2 rounded-full border-1 border-gray-200 bg-white px-4 py-2 shadow-sm">
-          <app-icon [svg]="feature.svg"></app-icon>
+          <app-icon
+            [svg]="feature.svg"
+            class="size-4 text-green-600"></app-icon>
 
           <span class="text-sm font-medium">{{ feature.text }}</span>
         </div>
@@ -41,7 +43,9 @@ interface FeatureWithContent extends Feature {
           class="flex items-start gap-3 rounded-xl border border-gray-200 bg-white/50 p-4 transition-all hover:bg-white hover:shadow-md">
           <div
             class="flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 p-2">
-            <app-icon [svg]="feature.svg"></app-icon>
+            <app-icon
+              [svg]="feature.svg"
+              class="size-5 text-blue-600"></app-icon>
           </div>
 
           <div class="space-y-1">
@@ -54,7 +58,7 @@ interface FeatureWithContent extends Feature {
   `,
   host: { class: 'space-y-8' },
 })
-export class LoginFeaturesComponent {
+export class AuthFeaturesComponent {
   readonly features: Feature[] = [
     {
       id: 1,

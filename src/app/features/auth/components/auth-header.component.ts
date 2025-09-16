@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-login-header',
+  selector: 'app-auth-header',
   imports: [],
   template: `
     <span
@@ -23,4 +23,4 @@ import { Component } from '@angular/core';
   `,
   host: { class: 'block space-y-4' },
 })
-export class LoginHeaderComponent {}
+export class AuthHeaderComponent {}
