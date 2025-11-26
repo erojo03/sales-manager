@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IconComponent } from '../../../shared/components';
 import {
   boxIcon,
@@ -9,6 +9,7 @@ import {
   statisticsIcon,
   usersIcon,
 } from '../../../shared/icons';
+import { AuthUiService } from '../services/auth-ui.service';
 
 interface Feature {
   id: number;
@@ -42,10 +43,11 @@ interface FeatureWithContent extends Feature {
         <div
           class="flex items-start gap-3 rounded-xl border border-gray-200 bg-white/50 p-4 transition-all hover:bg-white hover:shadow-md">
           <div
-            class="flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 p-2">
+            class="flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 p-2"
+            [class]="authUi.features().gradient">
             <app-icon
               [svg]="feature.svg"
-              class="size-5 text-blue-600"></app-icon>
+              [class]="authUi.features().iconColor + ' size-5'"></app-icon>
           </div>
 
           <div class="space-y-1">
@@ -59,6 +61,8 @@ interface FeatureWithContent extends Feature {
   host: { class: 'space-y-8' },
 })
 export class AuthFeaturesComponent {
+  readonly authUi = inject(AuthUiService);
+
   readonly features: Feature[] = [
     {
       id: 1,

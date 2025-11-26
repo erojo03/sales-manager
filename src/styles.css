@@ -10,3 +10,19 @@ body {
 .hide-password-toggle::-ms-reveal {
   display: none;
 }
+
+.login-gradient {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600;
+}
+
+.register-gradient {
+  @apply bg-gradient-to-r from-green-600 to-blue-600;
+}
+
+.login-features-gradient {
+  @apply bg-gradient-to-r from-blue-100 to-purple-100;
+}
+
+.register-features-gradient {
+  @apply bg-gradient-to-r from-green-100 to-blue-100;
+}

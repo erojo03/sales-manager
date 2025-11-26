@@ -1,7 +1,5 @@
-import { Component, computed, inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { AuthUiService } from '../services/auth-ui.service';
 
 @Component({
   selector: 'app-auth-header',
@@ -9,12 +7,12 @@ import { filter } from 'rxjs';
   template: `
     <span
       class="inline-flex w-fit items-center rounded-full px-2.5 py-1 text-sm font-semibold text-white"
-      [class]="gradient()"
-      >🚀 Sistema de Gestión Completo
+      [class]="authUi.mainGradient()">
+      🚀 Sistema de Gestión Completo
     </span>
     <h1 class="text-4xl font-bold tracking-tight lg:text-6xl">
       Gestiona tu
-      <span class="bg-clip-text text-transparent" [class]="gradient()">
+      <span [class]="authUi.mainGradient() + ' bg-clip-text text-transparent'">
         tienda de abarrotes
       </span>
       como un profesional
@@ -27,16 +25,5 @@ import { filter } from 'rxjs';
   host: { class: 'block space-y-4' },
 })
 export class AuthHeaderComponent {
-  private readonly router = inject(Router);
-  private readonly navigationEnd$ = this.router.events.pipe(
-    filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-  );
-  private readonly url = toSignal(this.navigationEnd$);
-
-  readonly isLoginRoute = computed(() => this.url()?.url.includes('login'));
-  readonly gradient = computed(() =>
-    this.isLoginRoute()
-      ? 'bg-gradient-to-r from-blue-600 to-purple-600'
-      : 'bg-gradient-to-r from-green-600 to-blue-600'
-  );
+  readonly authUi = inject(AuthUiService);
 }
