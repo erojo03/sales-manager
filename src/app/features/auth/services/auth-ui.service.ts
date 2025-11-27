@@ -13,22 +13,24 @@ export class AuthUiService {
   );
   private readonly url = toSignal(this.navigationEnd$);
 
-  readonly isLoginRoute = computed(() => this.url()?.url.includes('login'));
+  readonly isRegisterRoute = computed(() =>
+    this.url()?.url.includes('register')
+  );
 
   readonly mainGradient = computed(() =>
-    this.isLoginRoute() ? 'login-gradient' : 'register-gradient'
+    this.isRegisterRoute() ? 'register-gradient' : 'login-gradient'
   );
 
   readonly features = computed(() => {
-    if (this.isLoginRoute()) {
+    if (this.isRegisterRoute()) {
       return {
-        gradient: 'login-features-gradient',
-        iconColor: 'text-blue-600',
+        gradient: 'register-features-gradient',
+        iconColor: 'text-green-600',
       };
     }
     return {
-      gradient: 'register-features-gradient',
-      iconColor: 'text-green-600',
+      gradient: 'login-features-gradient',
+      iconColor: 'text-blue-600',
     };
   });
 }

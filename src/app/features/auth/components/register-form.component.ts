@@ -17,21 +17,23 @@ import {
   userIcon,
   buildingIcon,
 } from '../../../shared/icons';
+import { FormHeaderComponent } from './ui/form-header.component';
+import { SubmitButtonComponent } from './ui/submit-button.component';
 
 @Component({
   selector: 'app-register-form',
-  imports: [IconComponent, ReactiveFormsModule, RouterLink],
+  imports: [
+    IconComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    FormHeaderComponent,
+    SubmitButtonComponent,
+  ],
   template: `
-    <section class="flex flex-col items-center gap-1.5">
-      <div
-        class="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-blue-600">
-        <app-icon [svg]="storeIcon" class="size-8 text-white"></app-icon>
-      </div>
-      <h3 class="text-xl font-semibold tracking-tight">Crear cuenta</h3>
-      <p class="text-muted-foreground text-sm">
-        Comienza tu prueba gratuita en 2 minutos
-      </p>
-    </section>
+    <app-form-header
+      [icon]="storeIcon"
+      title="Crear cuenta"
+      subtitle="Toma el control total de tu negocio hoy" />
 
     <section>
       <div
@@ -74,7 +76,7 @@ import {
               id="name"
               type="text"
               formControlName="name"
-              placeholder="John Doe"
+              placeholder="Juan Perez"
               class="h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-black ring-offset-white placeholder:text-gray-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none" />
             @if (name.invalid && (name.dirty || name.touched)) {
               <div class="text-start text-sm text-red-600">
@@ -92,7 +94,7 @@ import {
               id="phone"
               type="tel"
               formControlName="phone"
-              placeholder="123 456 7890"
+              placeholder="999 999 999"
               class="h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-black ring-offset-white placeholder:text-gray-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none" />
           </label>
         </div>
@@ -253,13 +255,9 @@ import {
         }
       </div>
 
-      <button
-        type="submit"
+      <app-submit-button
         [disabled]="registerForm.invalid"
-        class="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-green-600 to-blue-600 px-4 py-2 text-base font-medium whitespace-nowrap text-white shadow-lg transition-all duration-200 hover:from-green-700 hover:to-blue-700 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
-        Crear mi cuenta
-        <app-icon [svg]="arrowRightIcon"></app-icon>
-      </button>
+        text="Crear mi cuenta" />
 
       <p class="text-center text-sm text-gray-500">
         ¿Ya tienes una cuenta?

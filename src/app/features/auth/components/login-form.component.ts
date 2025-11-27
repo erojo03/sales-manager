@@ -12,26 +12,24 @@ import {
   eyeOffIcon,
   starIcon,
 } from '../../../shared/icons';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FormHeaderComponent } from './ui/form-header.component';
+import { SubmitButtonComponent } from './ui/submit-button.component';
 
 @Component({
   selector: 'app-login-form',
-  imports: [IconComponent, ReactiveFormsModule, RouterLink],
+  imports: [
+    IconComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    FormHeaderComponent,
+    SubmitButtonComponent,
+  ],
   template: `
-    <section class="flex flex-col space-y-4 text-center">
-      <div
-        class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600">
-        <app-icon [svg]="boxIcon" class="size-8 text-white"></app-icon>
-      </div>
-      <div class="space-y-2">
-        <h3 class="text-2xl font-semibold tracking-tight">
-          Bienvenido de vuelta
-        </h3>
-        <p class="text-base text-gray-500">
-          Accede a tu dashboard de gestión empresarial
-        </p>
-      </div>
-    </section>
+    <app-form-header
+      [icon]="boxIcon"
+      title="Bienvenido de vuelta"
+      subtitle="Accede a tu dashboard de gestión empresarial" />
 
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-4">
       <label for="email" class="flex flex-col gap-2">
@@ -83,13 +81,10 @@ import { RouterLink } from '@angular/router';
           </div>
         }
       </label>
-      <button
-        type="submit"
+
+      <app-submit-button
         [disabled]="loginForm.invalid"
-        class="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-base font-medium whitespace-nowrap text-white shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
-        Acceder al Dashboard
-        <app-icon [svg]="arrowRightIcon"></app-icon>
-      </button>
+        text="Acceder al Dashboard" />
 
       <p class="text-center text-sm text-gray-500">
         ¿Aún no tienes una cuenta?
@@ -119,6 +114,7 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginFormComponent {
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly route = inject(Router);
 
   readonly loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -155,6 +151,8 @@ export class LoginFormComponent {
 
     // TODO: Implement authentication logic
     console.log('Login form submitted:', this.loginForm.getRawValue());
+
+    this.route.navigateByUrl('/home');
   }
 
   togglePasswordVisibility(): void {
